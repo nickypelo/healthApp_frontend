@@ -14,25 +14,19 @@ const StandardProfile = () => {
 
   const bmiDisplay = () =>{
         setShowBMI(!showBMI);
-        console.log('Bbb')
   }
 
   const scheduleDisplay = () =>{
     setShowSchedule(!showSchedule);
-    console.log('Bbb')
   }
 
   const goalsDisplay = () =>{
     setShowGoals(!showGoals);
-    console.log('Bbb')
   }
 
   const reviewsDisplay = () =>{
     setReviews(!showReviews);
-    console.log('Bbb')
   }
-
-
   
 
   return (
@@ -69,7 +63,7 @@ const StandardProfile = () => {
           <button onClick={reviewsDisplay} className="w-full"> <p className='text-left my-2 border-b-2 py-2 pl-2'>Review Application</p></button>
         }
 
-
+        
         
       </article>
       

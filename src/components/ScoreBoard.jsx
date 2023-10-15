@@ -49,7 +49,7 @@ const ScoreBoard = ({show, showBtn}) => {
                     <p>{tokens}/900</p>
                 </div>
                 <div className='text-center '>
-                    <div className={`bg-gradient-to-r from-amber-500 to-lime-600 w-[${gauge}] h-7`}></div>
+                    <div className={`bg-gradient-to-r from-amber-500 to-lime-600 w-[30%] h-7`}></div>
                 </div>
             </article>
         </article>

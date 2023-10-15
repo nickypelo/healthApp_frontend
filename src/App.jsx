@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Routes,Route} from 'react-router-dom';
+import RequireAuth from "./components/RequireAuth";
 
 
 //components Imports
@@ -24,6 +25,7 @@ import Advanced from "./pages/exercisePages/Advanced";
 
 //useContext imports
 import { TokensProvider } from "./context/TokensContext";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
 
@@ -40,32 +42,36 @@ function App() {
       {!firstUse
           ? <Tutorial yes={setSetUse}/>
           : 
-          <TokensProvider>
-                <Routes>
-                  {/* main pages */}
-                  <Route path='/' element={<Home/>}/>
-                  <Route path='/profile' element={<Profile/>}/>
-                  <Route path='/diet' element={<Diet/>}/>
-                  <Route path='/exercise' element={<Exercise/>}/>
-                  <Route path='/progress' element={<Progress/>}/>
-                  <Route path='/exercise' element={<Exercise/>}/>
+          <AuthProvider>
+              <TokensProvider>
+                  <Routes>
+                    {/* main pages */}
+                    <Route path='/' element={<Home/>}/>
+                    <Route path='/profile' element={<Profile/>}/>
+                    <Route path='/diet' element={<Diet/>}/>
+                    <Route path='/exercise' element={<Exercise/>}/>
+                    <Route path='/progress' element={<Progress/>}/>
+                    <Route path='/exercise' element={<Exercise/>}/>
 
-                  {/* progress sub-pages */}
-                  <Route path='/progress/before&after' element={<ProgressPhoto/>}/>
-                  <Route path='/progress' element={<Progress/>}/>
+                    {/* progress sub-pages */}
+                    <Route element={<RequireAuth/>}>
+                      <Route path='/progress/before&after' element={<ProgressPhoto/>}/>
+                    </Route>
+                    <Route path='/progress' element={<Progress/>}/>
 
-                  {/* exercise sub-pages */}
-                  <Route path='/exercise/beginner' element={<Beginner/>}/>
-                  <Route path='/exercise/intermediate' element={<Intermediate/>}/>
-                  <Route path='/exercise/advanced' element={<Advanced/>}/>
+                    {/* exercise sub-pages */}
+                    <Route path='/exercise/beginner' element={<Beginner/>}/>
+                    <Route path='/exercise/intermediate' element={<Intermediate/>}/>
+                    <Route path='/exercise/advanced' element={<Advanced/>}/>
 
-                  {/* Auth Routes */}
-                  <Route path="/register" element={<Register/>} />
-                  <Route path="/login" element={<Login />} />
+                    {/* Auth Routes */}
+                    <Route path="/register" element={<Register/>} />
+                    <Route path="/login" element={<Login />} />
 
-                </Routes>
-              <Navigation/>              
-          </TokensProvider>
+                  </Routes>
+                <Navigation/>              
+            </TokensProvider>
+          </AuthProvider>
       }
     </div>
     

@@ -9,15 +9,12 @@ const MealSection = ({image, dish, setters, selector}) => {
             const foodString = localStorage.getItem('food')
 
             if(foodItems.length === 0){
-                console.log('start')
                 localStorage.setItem('food', JSON.stringify([...foodItems, {id:id}]))
             }
             else if(!foodString.includes(id)){
-                console.log('Hello')
                 localStorage.setItem('food', JSON.stringify([...foodItems, {id:id}]))
             }
             else{
-                console.log('Bye bye')
                 const newList = foodItems.filter(item=> item.id !== id)
                 setters(id)
                 localStorage.setItem('food', JSON.stringify(newList))

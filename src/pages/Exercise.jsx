@@ -6,12 +6,28 @@ const Exercise = () => {
 
 
   const [BMI, setBMI] = useState('')
+
   useEffect(()=>{
         if(localStorage.getItem('BMI')){
             const bmi = JSON.parse(localStorage.getItem('BMI'));
             setBMI(bmi.detail)
         }
     },[])
+
+    //preload the food history
+    useEffect(()=>{
+      if(localStorage.getItem('exercise')){
+          const exerciseItems = JSON.parse(localStorage.getItem('exercise'));
+          for(let i = 0; i<exerciseItems.length; i++){
+              setters(exerciseItems[i].id)
+          }
+      }
+      else{
+          localStorage.setItem('exercise', JSON.stringify([]))
+      }
+
+  },[])
+
 
   return (
     <main>

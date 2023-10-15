@@ -9,7 +9,6 @@ const AdjustBMI = ({showBMI, setViewBMI}) => {
 
     const updateBMI = (e) => {
         e.preventDefault();
-        console.log("what's up doc")
         localStorage.setItem('BMI', JSON.stringify({value: BMI, detail: BMIresults(BMI)}))
         setViewBMI()
 

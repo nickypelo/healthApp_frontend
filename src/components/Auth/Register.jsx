@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Header from '../Header';
 
 const Register = () => {
 
@@ -14,27 +15,11 @@ const Register = () => {
     // const [pass, setPass] = useState('');
     const [email, setEmail] = useState('');
 
-    const getCSRFToken =() =>{
-        const cookieName = 'csrftoken=';
-        const decodedCookies = decodeURIComponent(document.cookie);
-        const cookiesArray = decodedCookies.split(';');
-    
-        for (let i = 0; i < cookiesArray.length; i++) {
-            let cookie = cookiesArray[i].trim();
-            if (cookie.indexOf(cookieName) === 0) {
-                return cookie.substring(cookieName.length, cookie.length);
-            }
-        }
-        return null; // return null if the CSRF token cookie is not found
+    const redirect = useNavigate()
+
+    const direct = () =>{
+        redirect('/profile')
     }
-    
-    // Example usage
-      const csrfToken = getCSRFToken();
-      if (csrfToken) {
-          console.log('CSRF Token:', csrfToken);
-      } else {
-          console.error('CSRF Token not found');
-      }
 
    
 
@@ -44,12 +29,12 @@ const Register = () => {
         const formData = {
             firstName, lastName, userName, email, password
         }
-
         try{
             const response = await axios.post(URL, JSON.stringify(formData),{
                 headers: {'Content-Type': 'application/json'},                    
             })
             console.log(response.data)
+            direct()
         }
         catch(error){
             console.error('Error', 'yeses')
@@ -58,62 +43,63 @@ const Register = () => {
 
 
   return (
-    <section className=' mt-16 xs:text-xl'>
-       
+    <>
+        <Header heading='Registration' />
+
+        <section className=' mt-8 xs:mt-20 xs:text-xl'>
         <form action="" onSubmit={handleSubmit} className="mx-auto w-4/5 p-4 h-4/5 border-2 rounded-lg text-black bg-white">
-            <h2 className='text-left text-xl font-bold xs:ml-6 xs:mb-4'>Register</h2>
             <div className='grid grid-cols-1 xs:grid-cols-2 xs:mb-6 text-left'>
                 <label htmlFor="firstName" className=" w-4/5 xs:mx-auto block"> Firstname:</label>
                 <input className="border-2 px-2 border-black block" required 
-                       type="text"  
-                       name={firstName}
-                       value={firstName}
-                       onChange={(e)=>setFirstName(e.target.value)} 
+                        type="text"  
+                        name={firstName}
+                        value={firstName}
+                        onChange={(e)=>setFirstName(e.target.value)} 
                 />
             </div>
             <div className='grid grid-cols-1 xs:grid-cols-2 xs:mb-6 text-left'>
                 <label htmlFor="lastName" className=" w-4/5 xs:mx-auto block"> Lastname:</label>
                 <input className="border-2 px-2 border-black block" required
-                       type="text"  
-                       name={lastName}
-                       value={lastName}
-                       onChange={(e)=>setLastName(e.target.value)}
+                        type="text"  
+                        name={lastName}
+                        value={lastName}
+                        onChange={(e)=>setLastName(e.target.value)}
                 />
             </div>
             <div className='grid grid-cols-1 xs:grid-cols-2 xs:mb-6 text-left'>
                 <label htmlFor="name" className=" w-4/5 xs:mx-auto block"> Username:</label>
                 <input className="border-2 px-2 border-black block" required
-                       type="text"  
-                       name={userName}
-                       value={userName}
-                       onChange={(e)=>setUserName(e.target.value)}
+                        type="text"  
+                        name={userName}
+                        value={userName}
+                        onChange={(e)=>setUserName(e.target.value)}
                 />
             </div>
             <div className='grid grid-cols-1 xs:grid-cols-2 xs:mb-6 text-left'>
                 <label htmlFor="name" className=" w-4/5 xs:mx-auto block"> Email:</label>
                 <input className="border-2 px-2 border-black block" required
-                       type="email"  
-                       name={email}
-                       value={email}
-                       onChange={(e)=>setEmail(e.target.value)}
+                        type="email"  
+                        name={email}
+                        value={email}
+                        onChange={(e)=>setEmail(e.target.value)}
                 />
             </div>
             <div className='grid grid-cols-1 xs:grid-cols-2 xs:mb-6 text-left'>
                 <label htmlFor="name" className=" w-4/5 xs:mx-auto block"> Password:</label>
                 <input className="border-2 px-2 border-black block" required
-                       type="password"  
-                       name={password}
-                       value={password}
-                       onChange={(e)=>setPassword(e.target.value)}
+                        type="password"  
+                        name={password}
+                        value={password}
+                        onChange={(e)=>setPassword(e.target.value)}
                 />
             </div>
             {/* <div>
                 <label htmlFor="name" className=" w-4/5 mx-auto"> Password again:</label>
                 <input className="border-2 border-black block" required
-                       type="password"  
-                       name={pass}
-                       value={pass}
-                       onChange={(e)=>setPass(e.target.value)}   
+                        type="password"  
+                        name={pass}
+                        value={pass}
+                        onChange={(e)=>setPass(e.target.value)}   
                 />
             </div> */}
             <article>
@@ -126,6 +112,7 @@ const Register = () => {
             
         </form>
     </section>
+    </>
   )
 }
 

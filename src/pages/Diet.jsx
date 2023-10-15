@@ -11,12 +11,13 @@ import taste2 from '../../public/stew2.jpg'
 import taste1 from '../../public/stew.jpg'
 import glass from '../../public/glass.png'
 import plus from '../../public/plus.png'
+import AuthContext from '../context/AuthContext';
 
 const Diet = () => {
 
     const redirect = useNavigate()
 
-    const [user, setUser] = useState(false)
+    const {user} = useContext(AuthContext)
 
     //useStates for the page
     const [dish1, setDish1] = useState(false);
@@ -159,7 +160,7 @@ const Diet = () => {
                     <button className='text-black bg-white px-2' >Share</button>
                 </form>  
                 :
-                <button onClick={inside}><p className="w-fit m-4 px-2  ">Sign In</p></button>
+                <button onClick={inside}><p className="w-fit m-4 px-2 bg-white rounded-2xl text-black ">Sign In</p></button>
             }
         
         </section>

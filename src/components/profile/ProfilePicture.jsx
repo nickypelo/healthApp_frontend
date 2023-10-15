@@ -1,10 +1,12 @@
 import React from 'react'
 
-const ProfilePicture = ({display, profilePic}) => {
+const ProfilePicture = ({display}) => {
 
     const uploadPicture = (e) => {
         e.preventDefault();
         console.log("what's up doc")
+
+        
 
     }
 
